@@ -13,6 +13,7 @@ sys.path.insert(0, str(PROJECT_DIR))
 
 from gaussian_knots.generation import (
     cycle_distortion,
+    distance_deformation_stats,
     edge_lengths,
     gaussian_polygon,
     haar_projected_simplex_polygon,
@@ -33,6 +34,10 @@ def main() -> int:
     assert np.allclose(vertices.T @ vertices, np.eye(3))
     assert np.all(lengths > 0.0)
     assert cycle_distortion(vertices) >= 1.0
+    deformation = distance_deformation_stats(vertices)
+    assert deformation["pair_distance_distortion"] >= 1.0
+    assert deformation["pair_normalized_ratio_min"] <= 1.0
+    assert deformation["pair_normalized_ratio_max"] >= 1.0
     assert minimum_nonadjacent_segment_distance(vertices) >= 0.0
     assert isinstance(is_numerically_embedded(vertices), bool)
 

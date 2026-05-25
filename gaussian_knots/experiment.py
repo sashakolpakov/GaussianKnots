@@ -12,6 +12,7 @@ import numpy as np
 
 from .generation import (
     cycle_distortion,
+    distance_deformation_stats,
     edge_lengths,
     is_numerically_embedded,
     minimum_nonadjacent_segment_distance,
@@ -66,6 +67,7 @@ def run_experiment(
             sample_rng = np.random.default_rng(sample_seed)
             vertices = projected_simplex_polygon(vertex_count, sample_rng, projection_model=projection_model)
             lengths = edge_lengths(vertices)
+            deformation = distance_deformation_stats(vertices)
             min_nonadjacent_distance = (
                 minimum_nonadjacent_segment_distance(vertices) if vertex_count >= 4 else float("inf")
             )
@@ -77,6 +79,7 @@ def run_experiment(
                 projection_model=projection_model,
                 vertices=vertices,
                 lengths=lengths,
+                deformation=deformation,
                 min_nonadjacent_distance=min_nonadjacent_distance,
                 embedded=is_numerically_embedded(vertices, tolerance=embedding_tolerance),
                 identification=identification,
@@ -101,6 +104,7 @@ def _sample_record(
     projection_model: str,
     vertices: np.ndarray,
     lengths: np.ndarray,
+    deformation: dict[str, float],
     min_nonadjacent_distance: float,
     embedded: bool,
     identification: KnotIdentification,
@@ -123,8 +127,11 @@ def _sample_record(
         "crossing_count": _optional_int(identification.crossing_count),
         "simplified_crossing_count": _optional_int(identification.simplified_crossing_count),
         "edge_length_min": float(np.min(lengths)),
+        "edge_length_mean": float(np.mean(lengths)),
+        "edge_length_rms": float(np.sqrt(np.mean(lengths * lengths))),
         "edge_length_max": float(np.max(lengths)),
         "cycle_distortion": cycle_distortion(vertices),
+        **deformation,
         "min_nonadjacent_segment_distance": min_nonadjacent_distance,
         "embedded_numerically": embedded,
         "fast_mode_requested": identification.fast_mode_requested,
@@ -143,6 +150,7 @@ def _summarize(
     trivial = sum(1 for record in records if record["is_nontrivial"] == "false")
     unknown = samples - nontrivial - trivial
     known = nontrivial + trivial
+    numeric = _numeric_columns(records)
     return {
         "N": vertex_count,
         "samples": samples,
@@ -153,6 +161,14 @@ def _summarize(
         "nontrivial_rate_known": nontrivial / known if known else "",
         "nontrivial_lower_bound_rate": nontrivial / samples,
         "unknown_rate": unknown / samples,
+        "cycle_distortion_mean": numeric["cycle_distortion_mean"],
+        "cycle_distortion_median": numeric["cycle_distortion_median"],
+        "pair_distance_distortion_mean": numeric["pair_distance_distortion_mean"],
+        "pair_distance_distortion_median": numeric["pair_distance_distortion_median"],
+        "pair_abs_ratio_rms_mean": numeric["pair_abs_ratio_rms_mean"],
+        "pair_rms_scale_to_simplex_mean": numeric["pair_rms_scale_to_simplex_mean"],
+        "pair_normalized_ratio_min_mean": numeric["pair_normalized_ratio_min_mean"],
+        "pair_normalized_ratio_max_mean": numeric["pair_normalized_ratio_max_mean"],
         "sample_file": str(sample_path),
     }
 
@@ -208,6 +224,27 @@ def _write_csv(path: Path, records: list[dict[str, object]]) -> None:
         writer = csv.DictWriter(handle, fieldnames=list(records[0].keys()))
         writer.writeheader()
         writer.writerows(records)
+
+
+def _numeric_columns(records: list[dict[str, object]]) -> dict[str, float]:
+    columns = {
+        "cycle_distortion": [],
+        "pair_distance_distortion": [],
+        "pair_abs_ratio_rms": [],
+        "pair_rms_scale_to_simplex": [],
+        "pair_normalized_ratio_min": [],
+        "pair_normalized_ratio_max": [],
+    }
+    for record in records:
+        for key in columns:
+            columns[key].append(float(record[key]))
+
+    values: dict[str, float] = {}
+    for key, column_values in columns.items():
+        array = np.asarray(column_values, dtype=float)
+        values[f"{key}_mean"] = float(np.mean(array))
+        values[f"{key}_median"] = float(np.median(array))
+    return values
 
 
 def _write_metadata(

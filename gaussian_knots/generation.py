@@ -8,6 +8,7 @@ from typing import Iterable, Iterator, Tuple
 import numpy as np
 
 DEFAULT_TARGET_DIM = 3
+SIMPLEX_DISTANCE = math.sqrt(2.0)
 PROJECTION_MODELS = ("haar", "gaussian")
 
 
@@ -102,6 +103,59 @@ def edge_lengths(vertices: np.ndarray) -> np.ndarray:
     points = _as_vertices(vertices)
     diffs = np.roll(points, -1, axis=0) - points
     return np.linalg.norm(diffs, axis=1)
+
+
+def pairwise_distances(vertices: np.ndarray) -> np.ndarray:
+    """Return all projected distances between distinct simplex vertices."""
+
+    points = _as_vertices(vertices)
+    values = []
+    for first in range(len(points)):
+        diffs = points[first + 1 :] - points[first]
+        values.extend(np.linalg.norm(diffs, axis=1))
+    return np.asarray(values, dtype=float)
+
+
+def distance_deformation_stats(vertices: np.ndarray) -> dict[str, float]:
+    """Return all-pair distance deformation statistics.
+
+    The original regular simplex has pair distance sqrt(2) for every pair.
+    Absolute ratios measure the literal metric deformation.  Normalized ratios
+    divide projected distances by their sample RMS, removing one global scale;
+    this isolates shape deformation and lets Haar and raw Gaussian projections
+    be compared on the same footing.
+    """
+
+    distances = pairwise_distances(vertices)
+    minimum = float(np.min(distances))
+    maximum = float(np.max(distances))
+    mean = float(np.mean(distances))
+    rms = float(np.sqrt(np.mean(distances * distances)))
+    std = float(np.std(distances))
+    if minimum <= 0.0:
+        distortion = math.inf
+    else:
+        distortion = maximum / minimum
+
+    scale_to_simplex_rms = SIMPLEX_DISTANCE / rms if rms > 0.0 else math.inf
+    normalized = distances / rms if rms > 0.0 else np.full_like(distances, math.inf)
+
+    return {
+        "pair_distance_min": minimum,
+        "pair_distance_mean": mean,
+        "pair_distance_rms": rms,
+        "pair_distance_std": std,
+        "pair_distance_max": maximum,
+        "pair_distance_distortion": distortion,
+        "pair_abs_ratio_min": minimum / SIMPLEX_DISTANCE,
+        "pair_abs_ratio_mean": mean / SIMPLEX_DISTANCE,
+        "pair_abs_ratio_rms": rms / SIMPLEX_DISTANCE,
+        "pair_abs_ratio_max": maximum / SIMPLEX_DISTANCE,
+        "pair_rms_scale_to_simplex": scale_to_simplex_rms,
+        "pair_normalized_ratio_min": float(np.min(normalized)),
+        "pair_normalized_ratio_mean": float(np.mean(normalized)),
+        "pair_normalized_ratio_max": float(np.max(normalized)),
+    }
 
 
 def cycle_distortion(vertices: np.ndarray) -> float:

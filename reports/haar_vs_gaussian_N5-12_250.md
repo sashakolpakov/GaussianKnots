@@ -19,6 +19,10 @@ Environment:
 - pyknotid catalogue database: installed
 - samples per `N`: `250`
 - seed: `20260524`
+- distance deformation columns: Hamiltonian edge max/min distortion; all-pair
+  projected simplex distance max/min distortion; all-pair RMS distance divided
+  by the original simplex distance `sqrt(2)`; and scale-free all-pair min/max
+  ratios after RMS normalization.
 
 Commands:
 
@@ -77,6 +81,19 @@ multiple catalogue entries, including `0_1`.  Those are counted as `unknown`.
 The per-sample CSVs include the raw and simplified Gauss codes for later
 manual inspection.
 
+Haar distance deformation:
+
+| N | edge max/min mean | all-pair max/min mean | RMS abs ratio | RMS scale | normalized min mean | normalized max mean |
+|---:|---:|---:|---:|---:|---:|---:|
+| 5 | 1.920 | 2.363 | 0.866 | 1.155 | 0.539 | 1.151 |
+| 6 | 2.454 | 3.573 | 0.775 | 1.291 | 0.414 | 1.269 |
+| 7 | 2.941 | 4.317 | 0.707 | 1.414 | 0.369 | 1.358 |
+| 8 | 3.459 | 5.707 | 0.655 | 1.528 | 0.322 | 1.434 |
+| 9 | 3.818 | 6.066 | 0.612 | 1.633 | 0.290 | 1.504 |
+| 10 | 3.615 | 6.873 | 0.577 | 1.732 | 0.264 | 1.560 |
+| 11 | 4.576 | 8.266 | 0.548 | 1.826 | 0.234 | 1.606 |
+| 12 | 4.401 | 9.123 | 0.522 | 1.915 | 0.222 | 1.645 |
+
 ## Gaussian Summary
 
 | N | classified | nontrivial | trivial | unknown | nontrivial rate |
@@ -113,6 +130,19 @@ Named nontrivial Gaussian detections:
 | 12 | `5_2` | 1 | 0.004 |
 | 12 | `6_1;9_46` | 1 | 0.004 |
 
+Gaussian distance deformation:
+
+| N | edge max/min mean | all-pair max/min mean | RMS abs ratio | RMS scale | normalized min mean | normalized max mean |
+|---:|---:|---:|---:|---:|---:|---:|
+| 5 | 3.078 | 4.322 | 0.972 | 1.084 | 0.415 | 1.488 |
+| 6 | 3.687 | 5.671 | 0.990 | 1.050 | 0.342 | 1.572 |
+| 7 | 3.773 | 5.963 | 0.984 | 1.047 | 0.321 | 1.617 |
+| 8 | 4.609 | 7.432 | 0.975 | 1.059 | 0.274 | 1.713 |
+| 9 | 4.566 | 8.249 | 0.987 | 1.035 | 0.245 | 1.752 |
+| 10 | 4.983 | 8.953 | 0.984 | 1.037 | 0.237 | 1.780 |
+| 11 | 4.995 | 9.366 | 0.987 | 1.030 | 0.232 | 1.808 |
+| 12 | 5.281 | 10.775 | 0.983 | 1.035 | 0.208 | 1.829 |
+
 ## Interpretation
 
 The experiment supports the expected qualitative picture:
@@ -123,8 +153,15 @@ The experiment supports the expected qualitative picture:
 - The nontrivial rate rises with `N` over this range.
 - Trefoils dominate at these small stick counts, with figure-eight and
   five-crossing knots appearing less often.
+- Raw Gaussian projections have all-pair RMS distance close to the original
+  simplex distance `sqrt(2)`, as expected from the `N(0,1/3)` normalization.
+  Haar row-orthonormal projections are globally smaller by the factor
+  `sqrt(3/(N-1))`; the `RMS scale` column records the compensating global
+  rescaling.  The scale-free normalized min/max columns show the residual
+  shape deformation after removing that global scale.
 
 The data are not yet a high-precision Haar estimate.  A next pass should use
 larger sample sizes, binomial confidence intervals, and possibly a policy for
 resolving ambiguous catalogue matches using stronger invariants or manual
-Gauss-code reduction.
+Gauss-code reduction.  The metric columns should also be reported with
+confidence intervals or quantiles in the next pass.

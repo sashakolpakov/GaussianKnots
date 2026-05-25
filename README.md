@@ -79,11 +79,22 @@ Important summary columns:
 - `unknown`: samples not classified by the available API/database/invariants.
 - `nontrivial_rate_known`: `nontrivial / classified`.
 - `nontrivial_lower_bound_rate`: `nontrivial / samples`.
+- `cycle_distortion_mean`: average max/min length distortion along the
+  Hamiltonian cycle.
+- `pair_distance_distortion_mean`: average max/min distance distortion over all
+  `N(N-1)/2` projected simplex vertex pairs.
+- `pair_abs_ratio_rms_mean`: average all-pair RMS projected distance divided by
+  the original simplex distance `sqrt(2)`.
+- `pair_rms_scale_to_simplex_mean`: average global scale that would match each
+  sample's all-pair RMS distance to `sqrt(2)`.
+- `pair_normalized_ratio_min_mean` and `pair_normalized_ratio_max_mean`: average
+  scale-free all-pair distance range after RMS normalization.
 
 Per-sample records also include `gauss_code`, `simplified_gauss_code`,
 Alexander values at roots 2, 3, and 4, Vassiliev degree 2/3 values where
-available, and raw/simplified crossing counts.  These fields are useful when
-catalogue identification is ambiguous.
+available, raw/simplified crossing counts, Hamiltonian-edge length statistics,
+and all-pair distance deformation statistics.  These fields are useful when
+catalogue identification is ambiguous or when comparing metric deformation.
 
 When the catalogue database is unavailable, the code still tries pyknotid
 invariants.  Nontriviality is counted only when an invariant detects it, so
@@ -97,6 +108,19 @@ A first 250-sample run for `N=5,...,12`, comparing Haar row-space sampling with
 raw Gaussian vertices, is summarized in:
 
 - `reports/haar_vs_gaussian_N5-12_250.md`
+
+## Sphinx Docs
+
+The repository includes a small Sphinx site in `docs/` with MathJax enabled for
+LaTeX rendering:
+
+```sh
+pip install -r docs/requirements.txt
+sphinx-build -b html docs docs/_build/html
+```
+
+The GitHub Actions workflow in `.github/workflows/docs.yml` builds and deploys
+the docs through GitHub Pages when Pages is enabled for the repository.
 
 ## Smoke Test
 
