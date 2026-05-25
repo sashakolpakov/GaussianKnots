@@ -3,25 +3,25 @@
 Date: 2026-05-24
 
 This is a first-pass Monte Carlo experiment for the Hamiltonian cycle
-`1 -> 2 -> ... -> N -> 1` through projected simplex vertices.
+$1\to2\to\cdots\to N\to1$ through projected simplex vertices.
 
 The Haar run samples row-orthonormal projections, i.e. Haar points in the
 Grassmann/Stiefel model governing knot type in the manuscript.  The Gaussian
-run samples raw Gaussian vertices from a `3 x N` Gaussian projection matrix.
+run samples Gaussian vertices from a $3\times N$ Gaussian projection matrix.
 The manuscript predicts the same knot-type law for these two models; the
-finite-sample tables below are consistent at this sample size but are not a
-precision estimate.
+finite-sample tables and figures below are consistent at this sample size but
+are not a precision estimate.
 
 Environment:
 
 - `pyknotid` version: `0.5.4`
 - fast backend: `True`
 - pyknotid catalogue database: installed
-- samples per `N`: `250`
+- samples per $N$: `250`
 - seed: `20260524`
-- distance deformation columns: Hamiltonian edge max/min distortion; all-pair
+- distance deformation metrics: Hamiltonian edge max/min distortion; all-pair
   projected simplex distance max/min distortion; all-pair RMS distance divided
-  by the original simplex distance `sqrt(2)`; and scale-free all-pair min/max
+  by the original simplex distance $\sqrt{2}$; and scale-free all-pair min/max
   ratios after RMS normalization.
 
 Commands:
@@ -44,7 +44,7 @@ Commands:
 
 ## Haar Summary
 
-| N | classified | nontrivial | trivial | unknown | nontrivial rate |
+| $N$ | classified | nontrivial | trivial | unknown | nontrivial rate |
 |---:|---:|---:|---:|---:|---:|
 | 5 | 250 | 0 | 250 | 0 | 0.000 |
 | 6 | 250 | 1 | 249 | 0 | 0.004 |
@@ -57,7 +57,7 @@ Commands:
 
 Named nontrivial Haar detections:
 
-| N | knot label | count | rate |
+| $N$ | knot label | count | rate |
 |---:|---|---:|---:|
 | 6 | `3_1` | 1 | 0.004 |
 | 7 | `3_1` | 1 | 0.004 |
@@ -81,22 +81,9 @@ multiple catalogue entries, including `0_1`.  Those are counted as `unknown`.
 The per-sample CSVs include the raw and simplified Gauss codes for later
 manual inspection.
 
-Haar distance deformation:
-
-| N | edge max/min mean | all-pair max/min mean | RMS abs ratio | RMS scale | normalized min mean | normalized max mean |
-|---:|---:|---:|---:|---:|---:|---:|
-| 5 | 1.920 | 2.363 | 0.866 | 1.155 | 0.539 | 1.151 |
-| 6 | 2.454 | 3.573 | 0.775 | 1.291 | 0.414 | 1.269 |
-| 7 | 2.941 | 4.317 | 0.707 | 1.414 | 0.369 | 1.358 |
-| 8 | 3.459 | 5.707 | 0.655 | 1.528 | 0.322 | 1.434 |
-| 9 | 3.818 | 6.066 | 0.612 | 1.633 | 0.290 | 1.504 |
-| 10 | 3.615 | 6.873 | 0.577 | 1.732 | 0.264 | 1.560 |
-| 11 | 4.576 | 8.266 | 0.548 | 1.826 | 0.234 | 1.606 |
-| 12 | 4.401 | 9.123 | 0.522 | 1.915 | 0.222 | 1.645 |
-
 ## Gaussian Summary
 
-| N | classified | nontrivial | trivial | unknown | nontrivial rate |
+| $N$ | classified | nontrivial | trivial | unknown | nontrivial rate |
 |---:|---:|---:|---:|---:|---:|
 | 5 | 250 | 0 | 250 | 0 | 0.000 |
 | 6 | 250 | 1 | 249 | 0 | 0.004 |
@@ -109,7 +96,7 @@ Haar distance deformation:
 
 Named nontrivial Gaussian detections:
 
-| N | knot label | count | rate |
+| $N$ | knot label | count | rate |
 |---:|---|---:|---:|
 | 6 | `3_1` | 1 | 0.004 |
 | 7 | `3_1` | 6 | 0.024 |
@@ -130,38 +117,37 @@ Named nontrivial Gaussian detections:
 | 12 | `5_2` | 1 | 0.004 |
 | 12 | `6_1;9_46` | 1 | 0.004 |
 
-Gaussian distance deformation:
+## Metric Deformation
 
-| N | edge max/min mean | all-pair max/min mean | RMS abs ratio | RMS scale | normalized min mean | normalized max mean |
-|---:|---:|---:|---:|---:|---:|---:|
-| 5 | 3.078 | 4.322 | 0.972 | 1.084 | 0.415 | 1.488 |
-| 6 | 3.687 | 5.671 | 0.990 | 1.050 | 0.342 | 1.572 |
-| 7 | 3.773 | 5.963 | 0.984 | 1.047 | 0.321 | 1.617 |
-| 8 | 4.609 | 7.432 | 0.975 | 1.059 | 0.274 | 1.713 |
-| 9 | 4.566 | 8.249 | 0.987 | 1.035 | 0.245 | 1.752 |
-| 10 | 4.983 | 8.953 | 0.984 | 1.037 | 0.237 | 1.780 |
-| 11 | 4.995 | 9.366 | 0.987 | 1.030 | 0.232 | 1.808 |
-| 12 | 5.281 | 10.775 | 0.983 | 1.035 | 0.208 | 1.829 |
+The original simplex has all pairwise distances equal to $\sqrt{2}$.  The
+figures below show the mean Hamiltonian edge max/min distortion, the mean
+all-pair max/min distortion, the all-pair RMS distance divided by $\sqrt{2}$,
+and the scale-free all-pair min/max range after RMS normalization.
+
+![Mean Hamiltonian-edge and all-pair max/min distance distortions.](../docs/_static/metric_distortion_means.svg)
+
+![All-pair RMS scale and scale-free all-pair distance range.](../docs/_static/metric_rms_normalized_range.svg)
 
 ## Interpretation
 
 The experiment supports the expected qualitative picture:
 
-- `N = 5` is unknotted in this sample.
-- Nontrivial knots are already detected by `N = 6`; the only possible
+- $N=5$ is unknotted in this sample.
+- Nontrivial knots are already detected by $N=6$; the only possible
   six-stick nontrivial knot is the trefoil, and that is what appears.
-- The nontrivial rate rises with `N` over this range.
+- The nontrivial rate rises with $N$ over this range.
 - Trefoils dominate at these small stick counts, with figure-eight and
   five-crossing knots appearing less often.
-- Raw Gaussian projections have all-pair RMS distance close to the original
-  simplex distance `sqrt(2)`, as expected from the `N(0,1/3)` normalization.
+- Gaussian projections have all-pair RMS distance close to the original
+  simplex distance $\sqrt{2}$, as expected from the
+  $\mathcal{N}(0,1/3)$ normalization.
   Haar row-orthonormal projections are globally smaller by the factor
-  `sqrt(3/(N-1))`; the `RMS scale` column records the compensating global
-  rescaling.  The scale-free normalized min/max columns show the residual
-  shape deformation after removing that global scale.
+  $\sqrt{3/(N-1)}$; the RMS-scale figure shows this global size difference.
+  The scale-free normalized min/max figure shows the residual shape deformation
+  after removing that global scale.
 
 The data are not yet a high-precision Haar estimate.  A next pass should use
 larger sample sizes, binomial confidence intervals, and possibly a policy for
 resolving ambiguous catalogue matches using stronger invariants or manual
-Gauss-code reduction.  The metric columns should also be reported with
-confidence intervals or quantiles in the next pass.
+Gauss-code reduction.  The metric figures should also include confidence
+intervals or quantiles in the next pass.

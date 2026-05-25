@@ -1,0 +1,10 @@
+div.sphinxsidebarwrapper h1.logo {
+    font-size: 22px;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+div.sphinxsidebarwrapper h1.logo a {
+    word-break: break-word;
+}

@@ -1,9 +1,9 @@
 # GaussianKnots
 
 Reproducibility package for projected-simplex Hamiltonian-cycle stick-knot
-experiments.  It projects the `N` labelled simplex vertices to `R^3`, orders
-them along the cycle `1-2-...-N-1`, and estimates the knot-type frequencies of
-the resulting closed polygon.
+experiments.  It projects the $N$ labelled simplex vertices to three-space,
+orders them along the cycle $1\to2\to\cdots\to N\to1$, and estimates the
+knot-type frequencies of the resulting closed polygon.
 
 This package is intentionally script-first: no notebooks are required.
 
@@ -49,7 +49,7 @@ Larger run:
 python3 scripts/run_knot_experiment.py --vertices 6,7,8,10,12 --samples 1000 --seed 20260524 --output-dir results/main
 ```
 
-Compare the Haar row-space model with raw Gaussian vertices:
+Compare the Haar model with Gaussian vertices:
 
 ```sh
 python3 scripts/run_knot_experiment.py --projection-model haar --vertices 6,7,8,10 --samples 250 --output-dir results/haar_250
@@ -82,11 +82,11 @@ Important summary columns:
 - `cycle_distortion_mean`: average max/min length distortion along the
   Hamiltonian cycle.
 - `pair_distance_distortion_mean`: average max/min distance distortion over all
-  `N(N-1)/2` projected simplex vertex pairs.
+  $N(N-1)/2$ projected simplex vertex pairs.
 - `pair_abs_ratio_rms_mean`: average all-pair RMS projected distance divided by
-  the original simplex distance `sqrt(2)`.
+  the original simplex distance $\sqrt{2}$.
 - `pair_rms_scale_to_simplex_mean`: average global scale that would match each
-  sample's all-pair RMS distance to `sqrt(2)`.
+  sample's all-pair RMS distance to $\sqrt{2}$.
 - `pair_normalized_ratio_min_mean` and `pair_normalized_ratio_max_mean`: average
   scale-free all-pair distance range after RMS normalization.
 
@@ -104,8 +104,8 @@ reported as `unknown`.
 
 ## First Numeric Run
 
-A first 250-sample run for `N=5,...,12`, comparing Haar row-space sampling with
-raw Gaussian vertices, is summarized in:
+A first 250-sample run for $N=5,\ldots,12$, comparing Haar sampling with
+Gaussian vertices, is summarized in:
 
 - `reports/haar_vs_gaussian_N5-12_250.md`
 
@@ -134,23 +134,23 @@ path.
 
 ## Model Notes
 
-For a given `N`, the default `--projection-model haar` samples a
+For a given $N$, the default `--projection-model haar` samples a
 Haar-distributed row-orthonormal projection of the simplex:
 
-```text
-Q Q^T = I_3,   sum_i Q e_i = 0,   x_i = Q e_i in R^3.
+```math
+Q Q^T = I_3,\qquad \sum_i Q e_i = 0,\qquad x_i = Q e_i \in \mathbb{R}^3.
 ```
 
 This directly samples the Grassmann/Stiefel model governing knot type in the
-manuscript.  The optional `--projection-model gaussian` instead samples raw
+manuscript.  The optional `--projection-model gaussian` instead samples
 Gaussian vertices
 
-```text
-x_i = P e_i in R^3,   P_ab ~ N(0, 1/3).
+```math
+x_i = P e_i \in \mathbb{R}^3,\qquad P_{ab}\sim\mathcal{N}(0,1/3).
 ```
 
-The manuscript proves these two models have the same knot-type law: the raw
-Gaussian map factors as `P = A Q`, and the invertible linear map `A` preserves
+The manuscript proves these two models have the same knot-type law: the
+Gaussian map factors as $P=AQ$, and the invertible linear map $A$ preserves
 ambient isotopy type.  They differ for metric statistics such as edge lengths.
 
 The parameter space is cut by discriminant walls where non-adjacent edges meet.
@@ -158,7 +158,7 @@ Knot type is locally constant on each chamber, and a generic wall crossing
 changes one diagram crossing.
 
 Closed polygonal knots with fewer than six sticks are marked unknotted by the
-stick-number obstruction.  For `N >= 6`, classification is delegated to
+stick-number obstruction.  For $N\ge 6$, classification is delegated to
 pyknotid where available.
 
 ## pyknotid API Assumptions

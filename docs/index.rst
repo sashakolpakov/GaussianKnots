@@ -17,7 +17,7 @@ joined in the cyclic order
    1 \to 2 \to \cdots \to N \to 1.
 
 The scripts estimate knot-type frequencies and metric distance deformation for
-Haar row-space projections and raw Gaussian projections.
+Haar projections and Gaussian projections.
 
 .. toctree::
    :maxdepth: 2

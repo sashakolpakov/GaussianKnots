@@ -1,19 +1,19 @@
-First Experiment
-================
+Experiments
+===========
 
-The first tracked run used 250 samples for each ``N=5,...,12`` with seed
-``20260524``.  Full command lines and knot-label details are in
+The first tracked run used 250 samples for each :math:`N=5,\ldots,12` with
+seed ``20260524``.  Full command lines and knot-label details are in
 ``reports/haar_vs_gaussian_N5-12_250.md``.
 
 Knot frequencies
 ----------------
 
-Haar row-space model:
+Haar model:
 
 .. list-table::
    :header-rows: 1
 
-   * - N
+   * - :math:`N`
      - classified
      - nontrivial
      - trivial
@@ -68,12 +68,12 @@ Haar row-space model:
      - 2
      - 0.145
 
-Raw Gaussian model:
+Gaussian model:
 
 .. list-table::
    :header-rows: 1
 
-   * - N
+   * - :math:`N`
      - classified
      - nontrivial
      - trivial
@@ -131,127 +131,18 @@ Raw Gaussian model:
 Metric deformation
 ------------------
 
-The original simplex has all pairwise distances equal to \(\sqrt{2}\).  The
-tables below report the mean Hamiltonian edge max/min distortion, the mean
-all-pair max/min distortion, the all-pair RMS distance divided by \(\sqrt{2}\),
-and the scale-free all-pair min/max range after RMS normalization.
+The original simplex has all pairwise distances equal to :math:`\sqrt{2}`.  The
+figures below report the mean Hamiltonian edge max/min distortion, the mean
+all-pair max/min distortion, the all-pair RMS distance divided by
+:math:`\sqrt{2}`, and the scale-free all-pair min/max range after RMS
+normalization.
 
-Haar row-space model:
+.. figure:: _static/metric_distortion_means.svg
+   :alt: Line graph of mean distance distortions for Haar and Gaussian models.
 
-.. list-table::
-   :header-rows: 1
+   Mean Hamiltonian-edge and all-pair max/min distance distortions.
 
-   * - N
-     - edge max/min
-     - all-pair max/min
-     - RMS abs ratio
-     - normalized min
-     - normalized max
-   * - 5
-     - 1.920
-     - 2.363
-     - 0.866
-     - 0.539
-     - 1.151
-   * - 6
-     - 2.454
-     - 3.573
-     - 0.775
-     - 0.414
-     - 1.269
-   * - 7
-     - 2.941
-     - 4.317
-     - 0.707
-     - 0.369
-     - 1.358
-   * - 8
-     - 3.459
-     - 5.707
-     - 0.655
-     - 0.322
-     - 1.434
-   * - 9
-     - 3.818
-     - 6.066
-     - 0.612
-     - 0.290
-     - 1.504
-   * - 10
-     - 3.615
-     - 6.873
-     - 0.577
-     - 0.264
-     - 1.560
-   * - 11
-     - 4.576
-     - 8.266
-     - 0.548
-     - 0.234
-     - 1.606
-   * - 12
-     - 4.401
-     - 9.123
-     - 0.522
-     - 0.222
-     - 1.645
+.. figure:: _static/metric_rms_normalized_range.svg
+   :alt: Graphs of RMS scale and normalized all-pair distance ranges.
 
-Raw Gaussian model:
-
-.. list-table::
-   :header-rows: 1
-
-   * - N
-     - edge max/min
-     - all-pair max/min
-     - RMS abs ratio
-     - normalized min
-     - normalized max
-   * - 5
-     - 3.078
-     - 4.322
-     - 0.972
-     - 0.415
-     - 1.488
-   * - 6
-     - 3.687
-     - 5.671
-     - 0.990
-     - 0.342
-     - 1.572
-   * - 7
-     - 3.773
-     - 5.963
-     - 0.984
-     - 0.321
-     - 1.617
-   * - 8
-     - 4.609
-     - 7.432
-     - 0.975
-     - 0.274
-     - 1.713
-   * - 9
-     - 4.566
-     - 8.249
-     - 0.987
-     - 0.245
-     - 1.752
-   * - 10
-     - 4.983
-     - 8.953
-     - 0.984
-     - 0.237
-     - 1.780
-   * - 11
-     - 4.995
-     - 9.366
-     - 0.987
-     - 0.232
-     - 1.808
-   * - 12
-     - 5.281
-     - 10.775
-     - 0.983
-     - 0.208
-     - 1.829
+   All-pair RMS scale and scale-free all-pair distance range.

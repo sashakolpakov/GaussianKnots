@@ -20,7 +20,7 @@ is needed:
 
    python3 scripts/run_knot_experiment.py --download-pyknotid-db --samples 1 --vertices 6
 
-Run a Haar row-space experiment:
+Run a Haar experiment:
 
 .. code-block:: sh
 
@@ -31,7 +31,7 @@ Run a Haar row-space experiment:
      --seed 20260524 \
      --output-dir results/haar_N5-12_250
 
-Run the raw Gaussian comparison:
+Run the Gaussian comparison:
 
 .. code-block:: sh
 
@@ -48,10 +48,10 @@ Outputs
 Each run writes:
 
 ``summary.csv``
-   Per-``N`` knot-type rates and metric deformation means.
+   Per-:math:`N` knot-type rates and metric deformation means.
 
 ``type_counts.csv``
-   Empirical knot-label counts by ``N``.
+   Empirical knot-label counts by :math:`N`.
 
 ``samples_N*.csv``
    One record per sampled polygon, including Gauss codes, invariants, edge

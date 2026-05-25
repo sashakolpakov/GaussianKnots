@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="690" viewBox="0 0 920 690" role="img">
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#20242a} .title{font-size:20px;font-weight:600}.label{font-size:13px}.tick{font-size:12px;fill:#555f6d}.legend{font-size:13px}.grid{stroke:#d8dde6;stroke-width:1}.axis{stroke:#555f6d;stroke-width:1.2}</style>
+<title>RMS scale and normalized all-pair distance range</title>
+<text x="460.0" y="35.0" class="title" text-anchor="middle" >All-Pair RMS Scale</text>
+<line x1="82" y1="239.7" x2="862" y2="239.7" class="grid"/>
+<text x="72.0" y="243.7" class="tick" text-anchor="end" >0.6</text>
+<line x1="82" y1="202.5" x2="862" y2="202.5" class="grid"/>
+<text x="72.0" y="206.5" class="tick" text-anchor="end" >0.7</text>
+<line x1="82" y1="165.2" x2="862" y2="165.2" class="grid"/>
+<text x="72.0" y="169.2" class="tick" text-anchor="end" >0.8</text>
+<line x1="82" y1="127.9" x2="862" y2="127.9" class="grid"/>
+<text x="72.0" y="131.9" class="tick" text-anchor="end" >0.9</text>
+<line x1="82" y1="90.6" x2="862" y2="90.6" class="grid"/>
+<text x="72.0" y="94.6" class="tick" text-anchor="end" >1</text>
+<line x1="82.0" y1="277" x2="82.0" y2="282" class="axis"/>
+<text x="82.0" y="299.0" class="tick" text-anchor="middle" >5</text>
+<line x1="193.4" y1="277" x2="193.4" y2="282" class="axis"/>
+<text x="193.4" y="299.0" class="tick" text-anchor="middle" >6</text>
+<line x1="304.9" y1="277" x2="304.9" y2="282" class="axis"/>
+<text x="304.9" y="299.0" class="tick" text-anchor="middle" >7</text>
+<line x1="416.3" y1="277" x2="416.3" y2="282" class="axis"/>
+<text x="416.3" y="299.0" class="tick" text-anchor="middle" >8</text>
+<line x1="527.7" y1="277" x2="527.7" y2="282" class="axis"/>
+<text x="527.7" y="299.0" class="tick" text-anchor="middle" >9</text>
+<line x1="639.1" y1="277" x2="639.1" y2="282" class="axis"/>
+<text x="639.1" y="299.0" class="tick" text-anchor="middle" >10</text>
+<line x1="750.6" y1="277" x2="750.6" y2="282" class="axis"/>
+<text x="750.6" y="299.0" class="tick" text-anchor="middle" >11</text>
+<line x1="862.0" y1="277" x2="862.0" y2="282" class="axis"/>
+<text x="862.0" y="299.0" class="tick" text-anchor="middle" >12</text>
+<line x1="82" y1="277" x2="862" y2="277" class="axis"/>
+<line x1="82" y1="72" x2="82" y2="277" class="axis"/>
+<text x="472.0" y="322.0" class="label" text-anchor="middle" ></text>
+<text x="18.0" y="174.5" class="label" text-anchor="middle" transform="rotate(-90 18 174.5)">RMS scale</text>
+<polyline points="82.00,90.64 193.43,90.64 304.86,90.64 416.29,90.64 527.71,90.64 639.14,90.64 750.57,90.64 862.00,90.64" fill="none" stroke="#555f6d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<polyline points="82.00,140.58 193.43,174.50 304.86,199.85 416.29,219.23 527.71,235.25 639.14,248.30 750.57,259.11 862.00,268.80" fill="none" stroke="#1f77b4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="82.00" cy="140.58" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<circle cx="193.43" cy="174.50" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<circle cx="304.86" cy="199.85" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<circle cx="416.29" cy="219.23" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<circle cx="527.71" cy="235.25" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<circle cx="639.14" cy="248.30" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<circle cx="750.57" cy="259.11" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<circle cx="862.00" cy="268.80" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<polyline points="82.00,101.07 193.43,94.36 304.86,96.60 416.29,99.95 527.71,95.48 639.14,96.60 750.57,95.48 862.00,96.97" fill="none" stroke="#d55e00" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<circle cx="82.00" cy="101.07" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<circle cx="193.43" cy="94.36" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<circle cx="304.86" cy="96.60" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<circle cx="416.29" cy="99.95" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<circle cx="527.71" cy="95.48" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<circle cx="639.14" cy="96.60" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<circle cx="750.57" cy="95.48" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<circle cx="862.00" cy="96.97" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<line x1="665" y1="96" x2="699" y2="96" stroke="#1f77b4" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="682" cy="96" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<text x="709.0" y="100.0" class="legend" text-anchor="start" >Haar</text>
+<line x1="665" y1="126" x2="699" y2="126" stroke="#d55e00" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 5"/>
+<circle cx="682" cy="126" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<text x="709.0" y="130.0" class="legend" text-anchor="start" >Gaussian</text>
+<line x1="665" y1="156" x2="699" y2="156" stroke="#555f6d" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 5"/>
+<circle cx="682" cy="156" r="4" fill="#fff" stroke="#555f6d" stroke-width="2"/>
+<text x="709.0" y="160.0" class="legend" text-anchor="start" >Original scale</text>
+<text x="460.0" y="345.0" class="title" text-anchor="middle" >Scale-Free All-Pair Distance Range</text>
+<line x1="82" y1="590.0" x2="862" y2="590.0" class="grid"/>
+<text x="72.0" y="594.0" class="tick" text-anchor="end" >0</text>
+<line x1="82" y1="538.8" x2="862" y2="538.8" class="grid"/>
+<text x="72.0" y="542.8" class="tick" text-anchor="end" >0.5</text>
+<line x1="82" y1="487.5" x2="862" y2="487.5" class="grid"/>
+<text x="72.0" y="491.5" class="tick" text-anchor="end" >1</text>
+<line x1="82" y1="436.2" x2="862" y2="436.2" class="grid"/>
+<text x="72.0" y="440.2" class="tick" text-anchor="end" >1.5</text>
+<line x1="82" y1="385.0" x2="862" y2="385.0" class="grid"/>
+<text x="72.0" y="389.0" class="tick" text-anchor="end" >2</text>
+<line x1="82.0" y1="590" x2="82.0" y2="595" class="axis"/>
+<text x="82.0" y="612.0" class="tick" text-anchor="middle" >5</text>
+<line x1="193.4" y1="590" x2="193.4" y2="595" class="axis"/>
+<text x="193.4" y="612.0" class="tick" text-anchor="middle" >6</text>
+<line x1="304.9" y1="590" x2="304.9" y2="595" class="axis"/>
+<text x="304.9" y="612.0" class="tick" text-anchor="middle" >7</text>
+<line x1="416.3" y1="590" x2="416.3" y2="595" class="axis"/>
+<text x="416.3" y="612.0" class="tick" text-anchor="middle" >8</text>
+<line x1="527.7" y1="590" x2="527.7" y2="595" class="axis"/>
+<text x="527.7" y="612.0" class="tick" text-anchor="middle" >9</text>
+<line x1="639.1" y1="590" x2="639.1" y2="595" class="axis"/>
+<text x="639.1" y="612.0" class="tick" text-anchor="middle" >10</text>
+<line x1="750.6" y1="590" x2="750.6" y2="595" class="axis"/>
+<text x="750.6" y="612.0" class="tick" text-anchor="middle" >11</text>
+<line x1="862.0" y1="590" x2="862.0" y2="595" class="axis"/>
+<text x="862.0" y="612.0" class="tick" text-anchor="middle" >12</text>
+<line x1="82" y1="590" x2="862" y2="590" class="axis"/>
+<line x1="82" y1="385" x2="82" y2="590" class="axis"/>
+<text x="472.0" y="635.0" class="label" text-anchor="middle" >Number of vertices</text>
+<text x="18.0" y="487.5" class="label" text-anchor="middle" transform="rotate(-90 18 487.5)">Normalized distance ratio</text>
+<polyline points="82.00,487.50 193.43,487.50 304.86,487.50 416.29,487.50 527.71,487.50 639.14,487.50 750.57,487.50 862.00,487.50" fill="none" stroke="#555f6d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<polygon points="82.00,472.02 193.43,459.93 304.86,450.81 416.29,443.01 527.71,435.84 639.14,430.10 750.57,425.38 862.00,421.39 862.00,567.25 750.57,566.01 639.14,562.94 527.71,560.27 416.29,557.00 304.86,552.18 193.43,547.57 82.00,534.75" fill="#1f77b4" opacity="0.18"/>
+<polygon points="82.00,437.48 193.43,428.87 304.86,424.26 416.29,414.42 527.71,410.42 639.14,407.55 750.57,404.68 862.00,402.53 862.00,568.68 750.57,566.22 639.14,565.71 527.71,564.89 416.29,561.91 304.86,557.10 193.43,554.94 82.00,547.46" fill="#d55e00" opacity="0.16"/>
+<polyline points="82.00,534.75 193.43,547.57 304.86,552.18 416.29,557.00 527.71,560.27 639.14,562.94 750.57,566.01 862.00,567.25" fill="none" stroke="#1f77b4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="82.00,472.02 193.43,459.93 304.86,450.81 416.29,443.01 527.71,435.84 639.14,430.10 750.57,425.38 862.00,421.39" fill="none" stroke="#1f77b4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="82.00,547.46 193.43,554.94 304.86,557.10 416.29,561.91 527.71,564.89 639.14,565.71 750.57,566.22 862.00,568.68" fill="none" stroke="#d55e00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<polyline points="82.00,437.48 193.43,428.87 304.86,424.26 416.29,414.42 527.71,410.42 639.14,407.55 750.57,404.68 862.00,402.53" fill="none" stroke="#d55e00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<line x1="112" y1="632" x2="146" y2="632" stroke="#1f77b4" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="129" cy="632" r="4" fill="#fff" stroke="#1f77b4" stroke-width="2"/>
+<text x="156.0" y="636.0" class="legend" text-anchor="start" >Haar normalized range</text>
+<line x1="360" y1="632" x2="394" y2="632" stroke="#d55e00" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 5"/>
+<circle cx="377" cy="632" r="4" fill="#fff" stroke="#d55e00" stroke-width="2"/>
+<text x="404.0" y="636.0" class="legend" text-anchor="start" >Gaussian normalized range</text>
+</svg>
