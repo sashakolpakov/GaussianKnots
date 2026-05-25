@@ -32,6 +32,8 @@ class KnotIdentification:
     alexander_roots: dict[str, str] = field(default_factory=dict)
     vassiliev_2: str | None = None
     vassiliev_3: str | None = None
+    gauss_code: str | None = None
+    simplified_gauss_code: str | None = None
     crossing_count: int | None = None
     simplified_crossing_count: int | None = None
     fast_mode_requested: bool = True
@@ -40,7 +42,7 @@ class KnotIdentification:
 
 
 def inspect_pyknotid_environment() -> PyknotidEnvironment:
-    """Return whether pyknotid imports and whether Cython helpers are present."""
+    """Return whether pyknotid imports and whether fast helpers are present."""
 
     try:
         _patch_numpy_legacy_aliases()
@@ -51,12 +53,19 @@ def inspect_pyknotid_environment() -> PyknotidEnvironment:
     version = getattr(module, "__version__", None)
     fast_backend_available: bool | None = None
     try:
+        importlib.import_module("numba")
+        fast_backend_available = True
+    except Exception:
+        fast_backend_available = False
+
+    try:
         spacecurve = importlib.import_module("pyknotid.spacecurves.spacecurve")
         cython_helpers = getattr(spacecurve, "chelpers", None)
         python_helpers = getattr(spacecurve, "helpers", None)
-        fast_backend_available = cython_helpers is not None and cython_helpers is not python_helpers
+        if cython_helpers is not None and cython_helpers is not python_helpers:
+            fast_backend_available = True
     except Exception:
-        fast_backend_available = None
+        pass
 
     return PyknotidEnvironment(
         available=True,
@@ -116,6 +125,8 @@ def identify_polygon(vertices: np.ndarray, use_fast: bool = True) -> KnotIdentif
     alexander_roots: dict[str, str] = {}
     vassiliev_2 = None
     vassiliev_3 = None
+    gauss_code_text = None
+    simplified_gauss_code_text = None
     knot_types: tuple[str, ...] = ()
 
     try:
@@ -126,8 +137,10 @@ def identify_polygon(vertices: np.ndarray, use_fast: bool = True) -> KnotIdentif
 
     try:
         gauss_code = _call_supported(knot.gauss_code, **raw_kwargs)
+        gauss_code_text = str(gauss_code)
         if hasattr(gauss_code, "simplify"):
             gauss_code.simplify()
+            simplified_gauss_code_text = str(gauss_code)
         simplified_crossing_count = _safe_crossing_count(gauss_code)
     except Exception as exc:
         messages.append(f"gauss_code simplification failed: {exc}")
@@ -194,6 +207,8 @@ def identify_polygon(vertices: np.ndarray, use_fast: bool = True) -> KnotIdentif
         alexander_roots=alexander_roots,
         vassiliev_2=vassiliev_2,
         vassiliev_3=vassiliev_3,
+        gauss_code=gauss_code_text,
+        simplified_gauss_code=simplified_gauss_code_text,
         crossing_count=crossing_count,
         simplified_crossing_count=simplified_crossing_count,
         fast_mode_requested=use_fast,
@@ -245,7 +260,7 @@ def _safe_crossing_count(gauss_code: Any) -> int | None:
         length = len(gauss_code)
     except Exception:
         return None
-    return int(length // 2)
+    return int(length)
 
 
 def _classify(

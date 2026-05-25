@@ -24,6 +24,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--samples", type=int, default=100, help="samples per vertex count")
     parser.add_argument("--seed", type=int, default=20260524, help="master random seed")
     parser.add_argument(
+        "--projection-model",
+        choices=("haar", "gaussian"),
+        default="haar",
+        help="projection model: Haar row-orthonormal simplex projection, or raw Gaussian coordinates",
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         default=PROJECT_DIR / "results" / "knot_experiment",
@@ -89,6 +95,7 @@ def main() -> int:
             use_fast=not args.no_fast,
             allow_missing_pyknotid=args.allow_missing_pyknotid,
             embedding_tolerance=args.embedding_tolerance,
+            projection_model=args.projection_model,
         )
     except Exception as exc:
         parser.exit(2, f"{exc}\n")
@@ -104,9 +111,9 @@ def main() -> int:
             f"rate_known={known_rate_text} "
             f"lower_bound={summary['nontrivial_lower_bound_rate']:.6f}"
         )
+    print(f"type counts written to {args.output_dir / 'type_counts.csv'}")
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -1,4 +1,4 @@
-"""Sampling and geometric checks for Gaussian Hamiltonian-cycle polygons."""
+"""Sampling and geometric checks for projected-simplex Hamiltonian cycles."""
 
 from __future__ import annotations
 
@@ -8,6 +8,61 @@ from typing import Iterable, Iterator, Tuple
 import numpy as np
 
 DEFAULT_TARGET_DIM = 3
+PROJECTION_MODELS = ("haar", "gaussian")
+
+
+def projected_simplex_polygon(
+    vertex_count: int,
+    rng: np.random.Generator,
+    projection_model: str = "haar",
+) -> np.ndarray:
+    """Sample the Hamiltonian cycle through projected simplex vertices.
+
+    The manuscript model starts with simplex vertices e_1,...,e_N in R^N and
+    projects them to R^3.  In the ``haar`` model this function samples a
+    Haar-distributed 3-plane in the centered coordinate hyperplane 1^perp and
+    returns the projected vertices in the cyclic order 1,2,...,N,1.
+
+    The ``gaussian`` model samples a raw 3 x N Gaussian projection matrix.  Its
+    knot-type law agrees with the Haar row-space model almost surely after
+    centering and applying the polar row factor, but its metric edge lengths are
+    sheared by the random singular values.
+    """
+
+    if projection_model == "haar":
+        return haar_projected_simplex_polygon(vertex_count, rng)
+    if projection_model == "gaussian":
+        return gaussian_polygon(vertex_count, rng)
+    raise ValueError(f"unknown projection model {projection_model!r}; expected one of {PROJECTION_MODELS}")
+
+
+def haar_projected_simplex_polygon(vertex_count: int, rng: np.random.Generator) -> np.ndarray:
+    """Project N simplex vertices by a Haar-distributed 3-plane.
+
+    The returned array has shape (N, 3); row i is the projected point P e_i.
+    The columns are centered and orthonormal:
+
+        vertices.T @ vertices = I_3,   sum_i vertices[i] = 0.
+
+    This is a concrete coordinate representative of a Haar point in
+    Gr(3, 1^perp) or, before quotienting by target rotations, in the Stiefel
+    manifold of row-orthonormal projections.
+    """
+
+    if vertex_count < 5:
+        raise ValueError("the simplex experiment expects at least 5 vertices")
+
+    gaussian_rows = rng.normal(size=(DEFAULT_TARGET_DIM, vertex_count))
+    centered_rows = gaussian_rows - gaussian_rows.mean(axis=1, keepdims=True)
+    q_matrix, _ = np.linalg.qr(centered_rows.T, mode="reduced")
+
+    # QR is unique only up to signs.  The signs do not affect knot type, but
+    # normalizing them makes seeded runs deterministic across LAPACK variants.
+    for column_index in range(q_matrix.shape[1]):
+        pivot = int(np.argmax(np.abs(q_matrix[:, column_index])))
+        if q_matrix[pivot, column_index] < 0:
+            q_matrix[:, column_index] *= -1.0
+    return q_matrix
 
 
 def gaussian_polygon(
@@ -25,8 +80,8 @@ def gaussian_polygon(
     generated data line up with the metric sections of the paper.
     """
 
-    if vertex_count < 3:
-        raise ValueError("a polygon needs at least 3 vertices")
+    if vertex_count < 5:
+        raise ValueError("the simplex experiment expects at least 5 vertices")
     if target_dim != 3:
         raise ValueError("knot identification requires target_dim=3")
     if scale is None:
@@ -165,4 +220,3 @@ def _edges_are_adjacent(first: int, second: int, vertex_count: int) -> bool:
 
 def _clip01(value: float) -> float:
     return max(0.0, min(1.0, value))
-

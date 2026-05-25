@@ -1,4 +1,2 @@
 numpy>=1.22
-Cython>=0.29
-pyknotid>=0.5.4
-
+pyknotid[performance] @ git+https://github.com/sashakolpakov/pyknotid.git

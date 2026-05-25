@@ -1,9 +1,9 @@
 # GaussianKnots
 
-Reproducibility package for the Gaussian projected Hamiltonian-cycle stick-knot
-experiment.  It samples the columns of a `3 x N` Gaussian projection matrix,
-orders them along the cycle `1-2-...-N-1`, and estimates how often the resulting
-closed polygon is detected as a nontrivial knot.
+Reproducibility package for projected-simplex Hamiltonian-cycle stick-knot
+experiments.  It projects the `N` labelled simplex vertices to `R^3`, orders
+them along the cycle `1-2-...-N-1`, and estimates the knot-type frequencies of
+the resulting closed polygon.
 
 This package is intentionally script-first: no notebooks are required.
 
@@ -17,11 +17,10 @@ python3 -m venv .venv
 pip install -r requirements.txt
 ```
 
-`pyknotid` can use optional compiled helpers for some space-curve operations.
-The requirements file lists `Cython` before `pyknotid` so a fresh install has a
-chance to build those helpers.  If the compiled helpers are not available, the
-scripts still request the fastest supported pyknotid API and report the backend
-status in `run_metadata.json`.
+This repository uses the `sashakolpakov/pyknotid` fork and requests its
+`performance` extra, which installs the Numba JIT backend advertised by that
+fork.  If the fast backend is not available, the scripts still run through the
+installed pyknotid path and report backend status in `run_metadata.json`.
 
 `pyknotid` catalogue identification may require its separate knot database.  If
 your run reports catalogue lookup failures, install the database with:
@@ -50,6 +49,13 @@ Larger run:
 python3 scripts/run_knot_experiment.py --vertices 6,7,8,10,12 --samples 1000 --seed 20260524 --output-dir results/main
 ```
 
+Compare the Haar row-space model with raw Gaussian vertices:
+
+```sh
+python3 scripts/run_knot_experiment.py --projection-model haar --vertices 6,7,8,10 --samples 250 --output-dir results/haar_250
+python3 scripts/run_knot_experiment.py --projection-model gaussian --vertices 6,7,8,10 --samples 250 --output-dir results/gaussian_250
+```
+
 If you only want to verify polygon generation on a machine without pyknotid:
 
 ```sh
@@ -63,6 +69,7 @@ Each run writes:
 - `run_metadata.json`: parameters and pyknotid import/fast-backend status.
 - `samples_N{N}.csv`: one record per sampled polygon.
 - `summary.csv`: counts and rates by stick count.
+- `type_counts.csv`: empirical knot-label frequencies by stick count.
 
 Important summary columns:
 
@@ -73,11 +80,23 @@ Important summary columns:
 - `nontrivial_rate_known`: `nontrivial / classified`.
 - `nontrivial_lower_bound_rate`: `nontrivial / samples`.
 
+Per-sample records also include `gauss_code`, `simplified_gauss_code`,
+Alexander values at roots 2, 3, and 4, Vassiliev degree 2/3 values where
+available, and raw/simplified crossing counts.  These fields are useful when
+catalogue identification is ambiguous.
+
 When the catalogue database is unavailable, the code still tries pyknotid
 invariants.  Nontriviality is counted only when an invariant detects it, so
 `nontrivial_lower_bound_rate` remains conservative.  Samples with trivial
 values for the computed invariants but no positive unknot identification are
 reported as `unknown`.
+
+## First Numeric Run
+
+A first 250-sample run for `N=5,...,12`, comparing Haar row-space sampling with
+raw Gaussian vertices, is summarized in:
+
+- `reports/haar_vs_gaussian_N5-12_250.md`
 
 ## Smoke Test
 
@@ -91,15 +110,28 @@ path.
 
 ## Model Notes
 
-For a given `N`, the script samples vertices
+For a given `N`, the default `--projection-model haar` samples a
+Haar-distributed row-orthonormal projection of the simplex:
 
 ```text
-x_i = P e_i in R^3,   P_{ab} ~ N(0, 1/3),
+Q Q^T = I_3,   sum_i Q e_i = 0,   x_i = Q e_i in R^3.
 ```
 
-then closes the Hamiltonian cycle through consecutive vertices.  The `1/sqrt(3)`
-scale matches the projection convention in the paper; knot type is unchanged by
-positive global rescaling.
+This directly samples the Grassmann/Stiefel model governing knot type in the
+manuscript.  The optional `--projection-model gaussian` instead samples raw
+Gaussian vertices
+
+```text
+x_i = P e_i in R^3,   P_ab ~ N(0, 1/3).
+```
+
+The manuscript proves these two models have the same knot-type law: the raw
+Gaussian map factors as `P = A Q`, and the invertible linear map `A` preserves
+ambient isotopy type.  They differ for metric statistics such as edge lengths.
+
+The parameter space is cut by discriminant walls where non-adjacent edges meet.
+Knot type is locally constant on each chamber, and a generic wall crossing
+changes one diagram crossing.
 
 Closed polygonal knots with fewer than six sticks are marked unknotted by the
 stick-number obstruction.  For `N >= 6`, classification is delegated to
@@ -113,8 +145,8 @@ verbose=False)`, and treats it as a closed curve using pyknotid's default closed
 optional keywords such as `try_cython`, `roots`, `vassiliev_2`, and
 `vassiliev_3`, because released pyknotid APIs differ.
 
-The preferred fast path is pyknotid's Cython-backed crossing/invariant support
-where exposed through `try_cython=True`.  If that backend is absent or an API
-does not accept the option, the run falls back to the installed Python path and
-records messages in the sample CSV.
-
+The preferred fast path is the fork's Numba JIT support, installed through the
+`performance` extra.  The adapter also requests older pyknotid fast-path
+keywords such as `try_cython=True` when an installed API exposes them.  If those
+backends are absent or an API does not accept an option, the run falls back to
+the installed Python path and records messages in the sample CSV.
