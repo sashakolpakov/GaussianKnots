@@ -5,6 +5,20 @@ The first tracked run used 250 samples for each :math:`N=5,\ldots,12` with
 seed ``20260524``.  Full command lines and knot-label details are in
 ``reports/haar_vs_gaussian_N5-12_250.md``.
 
+The current manuscript run uses 1000 samples for each :math:`N=5,\ldots,12`
+with seed ``20260604``.  At :math:`N=6`, the direct classifier Monte Carlo gives
+``2/1000 = 0.002`` trefoils in the Haar model and ``5/1000 = 0.005`` trefoils
+in the raw Gaussian comparison.  These are consistent with the targeted
+order-type bucket estimate
+
+.. math::
+
+   \widehat p_6(3_1)=1856/500000=0.003712,
+
+whose Wilson 95 percent interval is ``0.003547--0.003884``.  The direct
+1000-sample intervals are much wider, so the direct run is a sanity check rather
+than a sharp estimator of the six-stick trefoil probability.
+
 Knot frequencies
 ----------------
 

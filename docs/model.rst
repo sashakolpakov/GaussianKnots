@@ -62,3 +62,32 @@ The projection parameter space is divided by discriminant walls where two
 non-adjacent polygon edges intersect.  Away from these walls the polygon is an
 embedded stick knot and knot type is locally constant.  At a generic
 codimension-one wall, exactly one crossing changes.
+
+For :math:`N=6`, there are nine non-adjacent edge-pair determinant walls.  The
+full projective symmetry group of this wall arrangement has order 72 and lifts
+orthogonally to :math:`H=\mathbf{1}^{\perp}`.  The subgroup coming from
+Hamiltonian six-cycle relabellings is :math:`D_6` of order 12.  This subgroup
+preserves the labelled knot model; the other 60 wall symmetries preserve the
+wall arrangement but may change knot type.
+
+The current numerical order-type bucket proxy records the full order type of the six
+projected vertices:
+
+.. math::
+
+   \operatorname{sgn}\det(x_b-x_a,\;x_c-x_a,\;x_d-x_a),
+   \qquad \{a,b,c,d\}\subset\{0,\ldots,5\}.
+
+There are :math:`\binom{6}{4}=15` such signs.  They refine the nine wall signs,
+which are too coarse for knot type in the sampled :math:`N=6` data.  The
+resulting order-type estimate should be treated as numerical evidence for
+sector volume, not as an exact chamber-volume formula: one still has to prove
+connectivity of the relevant sign cells in the Stiefel/Grassmannian parameter
+space and control the segment-intersection inequalities.
+
+
+For :math:`N=7` and :math:`N=8`, ``gaussian_knots.general_chamber_geometry``
+builds the same determinant-wall and order-type data for exploratory probes.
+The corresponding repro scripts sample :math:`D_N` order-type buckets and check
+a limited number of direct classifier labels against representative labels;
+these diagnostics do not replace a proof of chamber connectivity.
