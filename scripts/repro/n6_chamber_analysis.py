@@ -130,7 +130,7 @@ def build_parser() -> argparse.ArgumentParser:
         default=ROOT / "results" / "n6_full_chamber_analysis.csv",
         help="CSV output for D6 order-type orbit representatives",
     )
-    parser.add_argument("--no-classify", action="store_true", help="skip pyknotid classification of orbit representatives")
+    parser.add_argument("--no-classify", action="store_true", help="skip pyknotid classification diagnostics")
     parser.add_argument(
         "--max-closure-rounds",
         type=int,
@@ -196,7 +196,10 @@ def main() -> int:
 
     print_header("Full Wall Group Versus Knot Type")
     print_full_class_summary(full_classes, representatives, classifications)
-    print_trefoil_image_test(simplex_vertices, common_lines, cliques, full_lifts, d6_wall_perms)
+    if args.no_classify:
+        print("trefoil image classification skipped: --no-classify")
+    else:
+        print_trefoil_image_test(simplex_vertices, common_lines, cliques, full_lifts, d6_wall_perms)
 
     print_header("Comparison With Direct Monte Carlo")
     print_simple_mc_comparison(simple_mc, label_summary, args.samples)
