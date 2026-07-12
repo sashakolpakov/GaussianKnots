@@ -115,7 +115,7 @@ It records:
 The 15 signs are
 
 ```math
-\operatorname{sgn}\det(x_b-x_a,\;x_c-x_a,\;x_d-x_a),
+\text{sgn}\det(x_b-x_a,\;x_c-x_a,\;x_d-x_a),
 \qquad \{a,b,c,d\}\subset\{0,\ldots,5\}.
 ```
 
