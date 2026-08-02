@@ -1,2 +1,2 @@
-numpy>=1.22
-pyknotid[performance] @ git+https://github.com/sashakolpakov/pyknotid.git
+numpy>=1.22,<3
+pyknotid[performance] @ git+https://github.com/sashakolpakov/pyknotid.git@cf11ab0c850d528d1ec9a0d9e26311f016cf1e2c

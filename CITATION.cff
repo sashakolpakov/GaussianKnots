@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this manuscript or its code, please cite the work below."
+title: "GaussianKnots: Random Knots via Stiefel Manifolds"
+type: software
+authors:
+  - family-names: Kolpakov
+    given-names: Alexander
+  - family-names: Rivin
+    given-names: Igor
+date-released: 2026-08-02
+repository-code: "https://github.com/sashakolpakov/GaussianKnots"
+url: "https://sashakolpakov.github.io/GaussianKnots/"
+preferred-citation:
+  type: article
+  title: "Random Knots via Stiefel Manifolds"
+  authors:
+    - family-names: Kolpakov
+      given-names: Alexander
+    - family-names: Rivin
+      given-names: Igor
+  year: 2026

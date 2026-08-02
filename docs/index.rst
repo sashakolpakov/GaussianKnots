@@ -1,27 +1,37 @@
-GaussianKnots
-=============
+|paper_title|
+===============
 
-GaussianKnots runs numerical experiments for Hamiltonian cycles through
-projected simplex vertices.
+|paper_authors|
 
-The main objects are the vertices
+GaussianKnots contains the manuscript, experiments, exact six-stick sign
+classifier, and formal-verification project for random Hamiltonian cycles
+through projected simplex vertices.
+
+.. important::
+
+   ``manuscript/knot_projections.tex`` is the source of truth for mathematical
+   statements. These pages explain the model and reproducibility workflow; they
+   do not replace the paper.
+
+The model joins
 
 .. math::
 
-   x_i = P e_i \in \mathbb{R}^3,\qquad i=1,\ldots,N,
+   x_i=P e_i\in\mathbb R^3,
+   \qquad i=1,\ldots,N,
 
-joined in the cyclic order
-
-.. math::
-
-   1 \to 2 \to \cdots \to N \to 1.
-
-The scripts estimate knot-type frequencies and metric distance deformation for
-Haar projections and Gaussian projections.
+in cyclic order. Gaussian and Haar row-orthonormal projections have the same
+knot-type law. The Lean development checks the concrete Gaussian crossing
+statistic and sensitivity bound, derives the exact crossing mean and tail
+constants from typed analytic inputs, and derives all six Calvo records from
+one determinant signature.
 
 .. toctree::
    :maxdepth: 2
 
-   usage
+   manuscript
    model
    experiments
+   reproducibility
+   formal_verification
+   usage

@@ -119,14 +119,12 @@ Named nontrivial Gaussian detections:
 
 ## Metric Deformation
 
-The original simplex has all pairwise distances equal to $\sqrt{2}$.  The
-figures below show the mean Hamiltonian edge max/min distortion, the mean
-all-pair max/min distortion, the all-pair RMS distance divided by $\sqrt{2}$,
-and the scale-free all-pair min/max range after RMS normalization.
-
-![Mean Hamiltonian-edge and all-pair max/min distance distortions.](../docs/_static/metric_distortion_means.svg)
-
-![All-pair RMS scale and scale-free all-pair distance range.](../docs/_static/metric_rms_normalized_range.svg)
+The original simplex has all pairwise distances equal to $\sqrt{2}$.  This
+pilot recorded Hamiltonian-edge and all-pair max/min distortion, all-pair RMS
+distance divided by $\sqrt{2}$, and the scale-free all-pair range after RMS
+normalization.  The pilot plots have been retired because the manuscript now
+uses the later 1000-sample tables; they should not be mistaken for current
+manuscript figures.
 
 ## Interpretation
 

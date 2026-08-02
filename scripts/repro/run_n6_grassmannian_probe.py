@@ -62,7 +62,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--output-dir",
         type=Path,
         default=None,
-        help="output directory; default is GaussianKnots/results/n6_grassmannian_<sampler>_<samples>",
+        help="output directory; default is results/n6_grassmannian_<sampler>_<samples>",
     )
     parser.add_argument(
         "--no-fast",

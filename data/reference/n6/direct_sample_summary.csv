@@ -1,0 +1,5 @@
+kind,label,count,rate,wilson95_lower,wilson95_upper
+label,0_1,993,0.99300000,0.98562168,0.99660513
+label,3_1,7,0.00700000,0.00339487,0.01437832
+status,identified_unknot,993,0.99300000,0.98562168,0.99660513
+status,identified_nontrivial,7,0.00700000,0.00339487,0.01437832

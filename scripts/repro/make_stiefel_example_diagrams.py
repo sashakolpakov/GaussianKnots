@@ -58,7 +58,7 @@ EXAMPLES = (
 
 
 def main() -> int:
-    out_dir = ROOT / "figures"
+    out_dir = ROOT / "manuscript" / "figures"
     out_dir.mkdir(exist_ok=True)
     panels = []
     for index, example in enumerate(EXAMPLES):

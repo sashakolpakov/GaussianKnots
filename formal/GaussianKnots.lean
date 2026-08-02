@@ -1,0 +1,31 @@
+import GaussianKnots.CircuitGenericity
+import GaussianKnots.CircuitConverse
+import GaussianKnots.Combinatorics
+import GaussianKnots.CrossingProbabilityCertificate
+import GaussianKnots.GaussianProbabilityCore
+import GaussianKnots.Geometry
+import GaussianKnots.HexagonSignature
+import GaussianKnots.Projections
+
+/-!
+# Conditional Lean certificate for GaussianKnots
+
+The root imports the complete publication target and audits its principal
+declarations. Deep cited analytic and topological inputs are theorem
+parameters, never project axioms.
+-/
+
+#print axioms GaussianKnots.segment_intersection_implies_det_wall
+#print axioms GaussianKnots.pairwise_normSq3_of_centered
+#print axioms GaussianKnots.affineDependence_eq_smul_circuit5_of_orient4_ne
+#print axioms GaussianKnots.calvoDataOfHexagon_eq_geometric
+#print axioms GaussianKnots.calvoD6b_contribution_ne_zero_iff_openSegmentTriangle
+#print axioms GaussianKnots.GaussianProbabilityCore.rawGaussianLaw_map_reindex
+#print axioms GaussianKnots.GaussianProbabilityCore.integral_columnDistanceSq_centered
+#print axioms GaussianKnots.CrossingProbabilityCertificate.card_crossingSlot_choose_sub
+#print axioms GaussianKnots.CrossingProbabilityCertificate.abs_rawGaussianCrossingStatistic_replaceColumn_le
+#print axioms GaussianKnots.CrossingProbabilityCertificate.rawGaussianCrossingStatistic_exact_mean
+#print axioms GaussianKnots.CrossingProbabilityCertificate.rawGaussianCrossingStatistic_centeredMatrix
+#print axioms GaussianKnots.CrossingProbabilityCertificate.centeredGaussianCrossingStatistic_exact_mean
+#print axioms GaussianKnots.CrossingProbabilityCertificate.rawGaussianCrossingStatistic_two_sided_tail
+#print axioms GaussianKnots.CrossingProbabilityCertificate.rawGaussianCrossingStatistic_normalized_tail

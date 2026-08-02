@@ -1,0 +1,62 @@
+name: Reproducibility checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  manuscript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-pictures
+      - name: Compile manuscript
+        working-directory: manuscript
+        run: latexmk -pdf -interaction=nonstopmode -halt-on-error knot_projections.tex
+
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: formal
+          build: true
+          use-mathlib-cache: true
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install lightweight test dependency
+        run: python -m pip install "numpy>=1.22,<3"
+      - name: Check reference-data hashes
+        working-directory: data/reference/n6
+        run: sha256sum -c SHA256SUMS
+      - name: Compile Python sources
+        run: python -m compileall -q gaussian_knots scripts
+      - name: Run package smoke test
+        run: python scripts/smoke_test.py
+      - name: Check exact N=6 classification
+        run: |
+          python scripts/repro/calvo_n6_exact.py \
+            --expected-trefoils 1856 \
+            --validate-standard-direct
+      - name: Check exact-law simulation invariants
+        run: |
+          python scripts/repro/validate_exact_projection_laws.py \
+            --crossing-samples 2000 \
+            --beta-samples 5000 \
+            --batch-size 500

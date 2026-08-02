@@ -1,162 +1,37 @@
-Experiments
-===========
+Experiments and reference data
+==============================
 
-The first tracked run used 250 samples for each :math:`N=5,\ldots,12` with
-seed ``20260524``.  Full command lines and knot-label details are in
-``reports/haar_vs_gaussian_N5-12_250.md``.
+The numerical tables in the :doc:`manuscript` come from 1000 Haar and 1000
+Gaussian samples for every :math:`N=5,\ldots,12`, with master seed
+``20260604``.  Unknown or ambiguous classifier outputs are retained rather
+than silently assigned.
 
-The current manuscript run uses 1000 samples for each :math:`N=5,\ldots,12`
-with seed ``20260604``.  At :math:`N=6`, the direct classifier Monte Carlo gives
-``2/1000 = 0.002`` trefoils in the Haar model and ``5/1000 = 0.005`` trefoils
-in the raw Gaussian comparison.  These are consistent with the targeted
-order-type bucket estimate
+Exact finite :math:`N=6` audit
+------------------------------
+
+The tracked bucket table contains 500,000 generic Haar samples in 155 observed
+mirror-merged, :math:`D_6`-canonical order-type buckets.  Applying the exact
+Calvo sign decision gives
 
 .. math::
 
-   \widehat p_6(3_1)=1856/500000=0.003712,
+   1856/500000=0.003712
 
-whose Wilson 95 percent interval is ``0.003547--0.003884``.  The direct
-1000-sample intervals are much wider, so the direct run is a sanity check rather
-than a sharp estimator of the six-stick trefoil probability.
+trefoils, with Wilson 95 percent interval ``0.003547--0.003884``.  The
+standard direct runs contain ``2/1000`` Haar and ``5/1000`` Gaussian trefoils;
+their intervals are much wider and overlap the larger estimate.
 
-Knot frequencies
+The word *exact* applies to classification of each generic stored sign vector,
+conditional on Calvo's theorem.  Sampling error remains in the estimated
+probability.
+
+The compact inputs and provenance notes are in
+`data/reference/n6 <https://github.com/sashakolpakov/GaussianKnots/tree/main/data/reference/n6>`_.
+The complete commands are in :doc:`reproducibility`.
+
+Historical pilot
 ----------------
 
-Haar model:
-
-.. list-table::
-   :header-rows: 1
-
-   * - :math:`N`
-     - classified
-     - nontrivial
-     - trivial
-     - unknown
-     - nontrivial rate
-   * - 5
-     - 250
-     - 0
-     - 250
-     - 0
-     - 0.000
-   * - 6
-     - 250
-     - 1
-     - 249
-     - 0
-     - 0.004
-   * - 7
-     - 250
-     - 1
-     - 249
-     - 0
-     - 0.004
-   * - 8
-     - 250
-     - 8
-     - 242
-     - 0
-     - 0.032
-   * - 9
-     - 250
-     - 9
-     - 241
-     - 0
-     - 0.036
-   * - 10
-     - 250
-     - 27
-     - 223
-     - 0
-     - 0.108
-   * - 11
-     - 249
-     - 29
-     - 220
-     - 1
-     - 0.116
-   * - 12
-     - 248
-     - 36
-     - 212
-     - 2
-     - 0.145
-
-Gaussian model:
-
-.. list-table::
-   :header-rows: 1
-
-   * - :math:`N`
-     - classified
-     - nontrivial
-     - trivial
-     - unknown
-     - nontrivial rate
-   * - 5
-     - 250
-     - 0
-     - 250
-     - 0
-     - 0.000
-   * - 6
-     - 250
-     - 1
-     - 249
-     - 0
-     - 0.004
-   * - 7
-     - 250
-     - 6
-     - 244
-     - 0
-     - 0.024
-   * - 8
-     - 250
-     - 7
-     - 243
-     - 0
-     - 0.028
-   * - 9
-     - 250
-     - 20
-     - 230
-     - 0
-     - 0.080
-   * - 10
-     - 250
-     - 24
-     - 226
-     - 0
-     - 0.096
-   * - 11
-     - 250
-     - 24
-     - 226
-     - 0
-     - 0.096
-   * - 12
-     - 250
-     - 30
-     - 220
-     - 0
-     - 0.120
-
-Metric deformation
-------------------
-
-The original simplex has all pairwise distances equal to :math:`\sqrt{2}`.  The
-figures below report the mean Hamiltonian edge max/min distortion, the mean
-all-pair max/min distortion, the all-pair RMS distance divided by
-:math:`\sqrt{2}`, and the scale-free all-pair min/max range after RMS
-normalization.
-
-.. figure:: _static/metric_distortion_means.svg
-   :alt: Line graph of mean distance distortions for Haar and Gaussian models.
-
-   Mean Hamiltonian-edge and all-pair max/min distance distortions.
-
-.. figure:: _static/metric_rms_normalized_range.svg
-   :alt: Graphs of RMS scale and normalized all-pair distance ranges.
-
-   All-pair RMS scale and scale-free all-pair distance range.
+The repository retains an earlier 250-sample report for historical comparison.
+Its tables and the retired metric plots are not manuscript data and are not
+used as documentation defaults.
