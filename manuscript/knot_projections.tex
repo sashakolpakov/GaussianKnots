@@ -81,10 +81,10 @@ simplex vertices, controls the topological part of the construction.
 
 We use two closely related models.
 \begin{itemize}
-\item \textbf{Raw Gaussian model:} \(P\in\Rbb^{3\times N}\) has independent
+\item[1.] Gaussian model: \(P\in\Rbb^{3\times N}\) has independent
 entries distributed as \(\mathcal N(0,1/3)\), and the polygon is
 \(\Gamma(P;\mathcal C)\).
-\item \textbf{Haar row-orthonormal model:} \(Q\) is Haar distributed on
+\item[2.] Haar row-orthonormal model: \(Q\) is Haar distributed on
 \[
 \St_3(H):=\{Q\in\Rbb^{3\times N}:QQ^T=I_3,\ Q\1=0\},
 \]
@@ -118,7 +118,7 @@ probabilities by sampling, not by exact chamber-volume formulas.
 Three features are relevant here.  First, the topological law has an exact Haar formulation
 on \(\St_3(H)\).  Second, the Hamiltonian cycle is distributionally irrelevant: choosing
 another cyclic ordering only relabels exchangeable simplex vertices.  Third, metric effects
-are separated from topology: raw Gaussian projections add singular-value shear, while the
+are separated from topology: Gaussian projections add singular-value shear, while the
 Haar row-orthonormal model removes it without changing knot type.
 
 \section{Generic stick knots}
@@ -238,7 +238,7 @@ knot labels that identify mirror images, the law descends to the Grassmannian.
 
 \begin{proposition}[Distributional invariance across cycles]\label{prop:cycle-invariance}
 Let \(\mathcal C\) and \(\mathcal C'\) be Hamiltonian cycles on \(\{1,\dots,N\}\).  Under
-either the raw Gaussian model or the Haar row-orthonormal model, the corresponding random
+either the Gaussian model or the Haar row-orthonormal model, the corresponding random
 polygons built from \(\mathcal C\) and \(\mathcal C'\) have the same distribution.
 \end{proposition}
 
@@ -396,7 +396,7 @@ every \(i\ne j\),
 \[
 \Ebb\|P(e_i-e_j)\|^2=2 .
 \]
-In particular, the raw Gaussian normalization preserves the squared simplex distance
+In particular, the Gaussian normalization preserves the squared simplex distance
 \(\|e_i-e_j\|^2=2\) in expectation.
 \end{lemma}
 
@@ -472,7 +472,7 @@ Indeed Proposition~\ref{prop:haar-scale} gives the deterministic dependence
 \section{Exact crossings of the planar shadow}
 
 Let \(C_N\) be the number of proper crossings between non--incident edges in
-the planar polygon obtained from the first two coordinates of the raw
+the planar polygon obtained from the first two coordinates of the
 Gaussian model.  Equivalently, one may use the first two rows of a Haar
 row-orthonormal projection: planar polar whitening is an invertible affine
 map and therefore preserves every segment intersection.
@@ -560,10 +560,10 @@ through projected simplex vertices, identifies the resulting stick knot with
 projection models
 are compared:
 \begin{itemize}
-\item \textbf{Haar row-space model:} sample a Haar three-plane in \(H\) and choose
-a row-orthonormal coordinate representative;
-\item \textbf{Raw Gaussian model:} sample \(P_{ab}\sim\mathcal N(0,1/3)\), center by
-\(P\Pi_H\), and use the translated-equivalent vertices \(Pe_i\).
+\item[1.] Gaussian model: sample \(P_{ab}\sim\mathcal N(0,1/3)\), center by
+\(P\Pi_H\), and use the translated-equivalent vertices \(Pe_i\);
+\item[2.] Haar row-space model: sample a Haar three-plane in \(H\) and choose
+a row-orthonormal coordinate representative.
 \end{itemize}
 The implementation fixes the signs of the QR columns by a deterministic pivot
 convention.  It therefore chooses a representative of a Haar row space rather
@@ -575,7 +575,7 @@ In particular, for a chiral pair these tables estimate the merged probability
 For chiral labels one should instead use the positive-diagonal QR convention
 (or apply an independent Haar element of \(O(3)\)).
 By Proposition~\ref{prop:stiefel}, the two models have the same knot-type probabilities
-\(p_N(K)\).  The raw Gaussian run also records the metric shear retained by \(P\Pi_H\);
+\(p_N(K)\).  The Gaussian run also records the metric shear retained by \(P\Pi_H\);
 this shear can affect diagram complexity and numerical conditioning, so ambiguous
 classifications are reported separately.
 
@@ -629,7 +629,7 @@ variation and classification ambiguity visible in the table.
 11 & \(110/1000\) & \(0.092\)--\(0.131\) & \(104/1000\) & \(0.087\)--\(0.124\)\\
 12 & \(133/1000\) & \(0.113\)--\(0.155\) & \(128/1000\) & \(0.109\)--\(0.150\)
 \end{tabular}
-\caption{Empirical resolved-nontrivial counts for the Haar row-space and raw Gaussian
+\caption{Empirical resolved-nontrivial counts for the Haar row-space and Gaussian
 models, with nominal Wilson 95\% binomial intervals for the displayed indicator.  The Haar run had
 unknown or ambiguous classifications for \(1\) sample at \(N=10\), \(2\) samples at
 \(N=11\), and \(1\) sample at \(N=12\).  The Gaussian run had unknown or ambiguous
@@ -695,7 +695,7 @@ The classifier also agreed on every one of the saved \(1000\) Haar and
 \(1000\) Gaussian \(N=6\) samples with the separately computed \texttt{pyknotid}
 label.  The rule is an exact classifier of a generic sign vector; the
 recorded signs and the Monte Carlo frequency are, of course, numerical.
-The Wilson intervals for the direct Haar and raw Gaussian counts in
+The Wilson intervals for the direct Haar and Gaussian counts in
 Table~\ref{tab:knot-rates}, \(2/1000\) and \(5/1000\), are much wider and both overlap
 \(0.003712\).  The direct runs are therefore consistent with the larger sign-classified run but too
 small to sharpen the \(N=6\) estimate.  In particular, Calvo's theorem upgrades
@@ -739,8 +739,7 @@ The runs also recorded distance deformation.  For all \(\binom N2\) vertex pairs
 \[
 D_{\rm pair}:=\frac{\max_{i<j}\|x_i-x_j\|}{\min_{i<j}\|x_i-x_j\|}.
 \]
-The original simplex distance is \(\sqrt2\).  By Lemma~\ref{lem:raw-distance-law}, the raw
-Gaussian normalization has expected squared pair distance \(2\).  By
+The original simplex distance is \(\sqrt2\).  By Lemma~\ref{lem:raw-distance-law}, the Gaussian normalization has expected squared pair distance \(2\).  By
 Proposition~\ref{prop:haar-scale}, the row-orthonormal Haar model has all-pair RMS distance
 \(\sqrt{2\cdot 3/(N-1)}\), so it requires the global rescaling factor
 \(\sqrt{(N-1)/3}\) for metric comparison.  Table~\ref{tab:metric-deformation} reports mean
@@ -777,7 +776,7 @@ The Lean~4/mathlib development at
 \url{https://github.com/sashakolpakov/GaussianKnots} defines the Gaussian
 product measure, proper-crossing statistic, vertex replacement, and
 six-vertex determinant signature, and verifies the metric identities,
-raw--centered invariance, \(2(N-3)\) sensitivity, and circuit/intersection
+Gaussian centering invariance, \(2(N-3)\) sensitivity, and circuit/intersection
 criterion.  From the complete four-point crossing-probability lemma as a typed
 input, Lean derives the stated mean; from a typed Doob certificate it derives
 both tail bounds by mathlib's Azuma--Hoeffding theorem; and it computes all six
