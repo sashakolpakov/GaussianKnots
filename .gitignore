@@ -18,6 +18,7 @@ formal/.lake
 *.bbl
 *.bcf
 *.blg
+*.dvi
 *.fdb_latexmk
 *.fls
 *.lof
