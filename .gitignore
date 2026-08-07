@@ -28,3 +28,7 @@ formal/.lake
 *.run.xml
 *.synctex.gz
 *.toc
+
+# Derived arXiv submission bundles; authoritative sources live in manuscript/.
+/manuscript-arxiv/
+/manuscript-arxiv.zip
